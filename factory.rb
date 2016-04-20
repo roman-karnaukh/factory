@@ -2,15 +2,16 @@
     def self.new(*arg, &block)
       Class.new do
         arg.each { |value| attr_accessor value}
-
+        class_eval(&block) unless block.nil?
 
         define_method :initialize do |*a|
           a.each_with_index {|v, i| instance_variable_set "@#{arg[i]}", v}
         end
 
-        def [](key) send(key) end
-
-        class_eval(&block) unless block.nil?
+        def [](clef)
+          return instance_variable_get(instance_variables[clef]) if clef.is_a? Fixnum
+          send(clef)
+        end
       end
     end
   end
