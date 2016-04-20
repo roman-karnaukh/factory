@@ -5,7 +5,7 @@
         class_eval(&block) unless block.nil?
 
         define_method :initialize do |*a|
-          a.each_with_index {|v, i| instance_variable_set "@#{arg[i]}", v}
+          a.each_with_index {|v, i| instance_variable_set("@#{arg[i]}", v)}
         end
 
         def [](clef)
@@ -17,7 +17,7 @@
   end
 
 
-#Using
+#Usage
 
 Customer = Factory.new(:name, :address, :zip) do
   def greeting
