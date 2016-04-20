@@ -8,7 +8,7 @@
 
 
 
-    define_method :initialize do |*args|
+    def initialize *args
       args.each_with_index do |value, index|
         instance_variable_set("@#{arg[index]}", value)
       end
